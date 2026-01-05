@@ -19,29 +19,33 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require("fs");
+            const fs = require('fs');
+
             const owner = context.repo.owner;
 
             const repos = await github.paginate(github.rest.repos.listForUser, {
               username: owner,
               per_page: 100,
-              sort: "updated",
-              direction: "desc",
+              sort: 'updated',
+              direction: 'desc'
             });
 
             const filtered = repos.filter(r => !r.fork);
 
-            const sumValues = (obj) => Object.values(obj).reduce((a,b)=>a+b, 0);
-            const toPct = (part, total) => total === 0 ? 0 : (part / total) * 100;
+            function sumValues(obj) {
+              return Object.values(obj).reduce((a, b) => a + b, 0);
+            }
 
-            const overall = {}; // language -> bytes
+            function pct(part, total) {
+              return total === 0 ? 0 : (part / total) * 100;
+            }
+
+            const overall = {};
             const perRepo = [];
 
             for (const r of filtered) {
-              const { data: langs } = await github.rest.repos.listLanguages({
-                owner,
-                repo: r.name,
-              });
+              const resp = await github.rest.repos.listLanguages({ owner, repo: r.name });
+              const langs = resp.data;
 
               const totalBytes = sumValues(langs);
               perRepo.push({ name: r.name, totalBytes, langs });
@@ -51,6 +55,62 @@ jobs:
               }
             }
 
-            // Write JSON for graph
-            fs.mkdirSync("assets", { recursive: true });
-            fs.writeFileSync("assets/l
+            fs.mkdirSync('assets', { recursive: true });
+            fs.writeFileSync('assets/languages.json', JSON.stringify(overall, null, 2), 'utf8');
+
+            const overallTotal = sumValues(overall);
+            const overallSorted = Object.entries(overall).sort((a, b) => b[1] - a[1]);
+
+            let full = '';
+            full += '# Language usage report\n\n';
+            full += 'Generated: ' + new Date().toISOString() + '\n\n';
+            full += '## Overall (all repos combined)\n\n';
+            full += '| Language | Share | Bytes |\n|---|---:|---:|\n';
+
+            for (const [lang, bytes] of overallSorted) {
+              full += '| ' + lang + ' | ' + pct(bytes, overallTotal).toFixed(2) + '% | ' + bytes.toLocaleString() + ' |\n';
+            }
+
+            full += '\nTotal bytes: **' + overallTotal.toLocaleString() + '**\n\n';
+
+            perRepo.sort((a, b) => b.totalBytes - a.totalBytes);
+
+            full += '## Per repository (top 5 languages)\n\n';
+            full += '| Repo | Total bytes | Top languages |\n|---|---:|---|\n';
+
+            for (const r of perRepo) {
+              const entries = Object.entries(r.langs).sort((a, b) => b[1] - a[1]);
+              const top5 = entries.slice(0, 5).map(([lang, bytes]) => {
+                return lang + ' ' + pct(bytes, r.totalBytes).toFixed(1) + '%';
+              }).join(', ');
+
+              full += '| ' + r.name + ' | ' + r.totalBytes.toLocaleString() + ' | ' + (top5 || '—') + ' |\n';
+            }
+
+            fs.writeFileSync('LANGUAGES.md', full, 'utf8');
+
+            // README injection (between markers)
+            const readmePath = 'README.md';
+            if (fs.existsSync(readmePath)) {
+              const readme = fs.readFileSync(readmePath, 'utf8');
+              const start = '<!-- LANGUAGES:START -->';
+              const end = '<!-- LANGUAGES:END -->';
+
+              if (readme.includes(start) && readme.includes(end)) {
+                let snippet = '';
+                snippet += start + '\n\n';
+                snippet += '### Overall (top 10)\n\n';
+                snippet += '| Language | Share |\n|---|---:|\n';
+
+                for (const [lang, bytes] of overallSorted.slice(0, 10)) {
+                  snippet += '| ' + lang + ' | ' + pct(bytes, overallTotal).toFixed(2) + '% |\n';
+                }
+
+                snippet += '\nFull details in **LANGUAGES.md**.\n\n';
+                snippet += end;
+
+                const re = new RegExp(start + '[\\s\\S]*?' + end, 'm');
+                const updated = readme.replace(re, snippet);
+                fs.writeFileSync(readmePath, updated, 'utf8');
+              }
+            }
