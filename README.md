@@ -5,4 +5,4 @@
 
 ## 🧠 Languages
 
-📄 Raw data: [languages.json](assets/languages.json)
+![Languages overview](assets/languages.png)
