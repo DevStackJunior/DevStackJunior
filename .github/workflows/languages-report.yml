@@ -140,6 +140,10 @@ jobs:
           ls -la assets
           python scripts/languages_graph.py
           ls -la assets
+
+      - name: Ajout Graphique Image
+        run: git add assets/languages.png
+
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"

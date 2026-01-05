@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 def main():
     data_path = Path("assets/languages.json")
     out_path = Path("assets/languages.png")
+    plt.savefig(out_path, dpi=150)
 
     data = json.loads(data_path.read_text(encoding="utf-8"))
 
