@@ -1,4 +1,4 @@
-name: Languages report (overall + per repo)
+name: Languages report + graph
 
 on:
   workflow_dispatch:
@@ -15,14 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate languages report
+      - name: Generate language totals (JSON + Markdown)
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require("fs");
             const owner = context.repo.owner;
 
-            // List repos for the user (public; includes private if this token has access)
             const repos = await github.paginate(github.rest.repos.listForUser, {
               username: owner,
               per_page: 100,
@@ -30,17 +29,15 @@ jobs:
               direction: "desc",
             });
 
-            // ignore forks (optional)
             const filtered = repos.filter(r => !r.fork);
 
             const sumValues = (obj) => Object.values(obj).reduce((a,b)=>a+b, 0);
             const toPct = (part, total) => total === 0 ? 0 : (part / total) * 100;
 
             const overall = {}; // language -> bytes
-            const perRepo = []; // {name, totalBytes, langs}
+            const perRepo = [];
 
             for (const r of filtered) {
-              // GitHub API: List repository languages
               const { data: langs } = await github.rest.repos.listLanguages({
                 owner,
                 repo: r.name,
@@ -54,71 +51,6 @@ jobs:
               }
             }
 
-            const overallTotal = sumValues(overall);
-            const overallSorted = Object.entries(overall).sort((a,b)=>b[1]-a[1]);
-
-            // Write LANGUAGES.md (full details)
-            let full = `# Language usage report\n\n`;
-            full += `Generated: ${new Date().toISOString()}\n\n`;
-            full += `## Overall (all repos combined)\n\n`;
-            full += `| Language | Share | Bytes |\n|---|---:|---:|\n`;
-            for (const [lang, bytes] of overallSorted) {
-              full += `| ${lang} | ${toPct(bytes, overallTotal).toFixed(2)}% | ${bytes.toLocaleString()} |\n`;
-            }
-            full += `\nTotal bytes: **${overallTotal.toLocaleString()}**\n\n`;
-
-            perRepo.sort((a,b)=>b.totalBytes - a.totalBytes);
-
-            full += `## Per repository (top 5 languages)\n\n`;
-            full += `| Repo | Total bytes | Top languages |\n|---|---:|---|\n`;
-            for (const r of perRepo) {
-              const entries = Object.entries(r.langs).sort((a,b)=>b[1]-a[1]);
-              const top5 = entries.slice(0, 5).map(([lang, bytes]) => {
-                const pct = toPct(bytes, r.totalBytes).toFixed(1);
-                return `${lang} ${pct}%`;
-              }).join(", ");
-              full += `| ${r.name} | ${r.totalBytes.toLocaleString()} | ${top5 || "—"} |\n`;
-            }
-
-            fs.writeFileSync("LANGUAGES.md", full, "utf8");
-
-            // Inject a short table into README between markers
-            const readmePath = "README.md";
-            if (fs.existsSync(readmePath)) {
-              const readme = fs.readFileSync(readmePath, "utf8");
-              const start = "<!-- LANGUAGES:START -->";
-              const end = "<!-- LANGUAGES:END -->";
-
-              if (readme.includes(start) && readme.includes(end)) {
-                const snippetLines = [];
-                snippetLines.push(start);
-                snippetLines.push("");
-                snippetLines.push("### Overall (top 10)");
-                snippetLines.push("");
-                snippetLines.push("| Language | Share |");
-                snippetLines.push("|---|---:|");
-                for (const [lang, bytes] of overallSorted.slice(0, 10)) {
-                  snippetLines.push(`| ${lang} | ${toPct(bytes, overallTotal).toFixed(2)}% |`);
-                }
-                snippetLines.push("");
-                snippetLines.push("Full details in **LANGUAGES.md**.");
-                snippetLines.push("");
-                snippetLines.push(end);
-
-                const snippet = snippetLines.join("\n");
-                const updated = readme.replace(
-                  new RegExp(`${start}[\\s\\S]*?${end}`, "m"),
-                  snippet
-                );
-                fs.writeFileSync(readmePath, updated, "utf8");
-              }
-            }
-
-      - name: Commit & push if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md LANGUAGES.md || true
-          git diff --cached --quiet && exit 0
-          git commit -m "chore: update language usage report"
-          git push
+            // Write JSON for graph
+            fs.mkdirSync("assets", { recursive: true });
+            fs.writeFileSync("assets/l
