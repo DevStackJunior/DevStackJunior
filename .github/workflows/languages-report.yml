@@ -15,6 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Ensure assets folder exists
+        run: |
+          mkdir -p assets
+          ls -la
+          ls -la assets || true
+
+      - name: Debug generated files
+        run: |
+          echo "Tree:"
+          find . -maxdepth 3 -type f | sort
+
       - name: Generate language totals (JSON + Markdown)
         uses: actions/github-script@v7
         with:
@@ -114,3 +125,14 @@ jobs:
                 fs.writeFileSync(readmePath, updated, 'utf8');
               }
             }
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add README.md LANGUAGES.md assets scripts || true
+
+          git status
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: update languages report and graph"
+          git push
