@@ -1,2 +1,6 @@
-[![Devstackjunior's GitHub stats](https://github-readme-stats.vercel.app/api?username=devstackjunior)](https://github.com/devstackjunior)
+
+### Activity
+![GitHub Activity Graph](https://activity-graph.herokuapp.com/graph?username=devstackjunior&theme=react-dark)
+
+
 
