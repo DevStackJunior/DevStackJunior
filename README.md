@@ -18,6 +18,7 @@ I am refining my "Test-First" approach to build more resilient software:
 
 | Category | Tools & Frameworks |
 | :--- | :--- |
+| **Styling** | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) |
 | **Full-Stack** | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) |
 | **Front-End** | ![Vue.js](https://img.shields.io/badge/Vue.js-42b883?style=for-the-badge&logo=vue.js&logoColor=white) |
 | **Back-End** | ![AdonisJS](https://img.shields.io/badge/AdonisJS_v6-5a45ff?style=for-the-badge&logo=adonisjs&logoColor=white) |
