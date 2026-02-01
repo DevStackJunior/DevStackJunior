@@ -16,10 +16,20 @@ I am refining my "Test-First" approach to build more resilient software:
 
 ## 🛠 Tech Stack
 
-### Frameworks & Infrastructure
+### Front-End Framework
 <p align="left">
   <img src="https://img.shields.io/badge/Vue.js-42b883?style=for-the-badge&logo=vue.js&logoColor=white" alt="VueJS" />
-  <img src="https://img.shields.io/badge/AdonisJS_v6-5a45ff?style=for-the-badge&logo=adonisjs&logoColor=white" alt="AdonisJS" />
+</p>
+
+### Full-Stack Framework
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="NextJS" />
+
+
+### Back-End Framework
+<img src="https://img.shields.io/badge/AdonisJS_v6-5a45ff?style=for-the-badge&logo=adonisjs&logoColor=white" alt="AdonisJS" />
+
+### Infrastructures
+<p align="left">
   <img src="https://img.shields.io/badge/Docker-2496ed?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure" />
 </p>
