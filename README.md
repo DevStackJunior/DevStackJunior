@@ -34,9 +34,6 @@ I am refining my "Test-First" approach to build more resilient software:
   <img src="https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure" />
 </p>
 
-### 🧠 Languages
-![Languages overview](assets/languages.png)
-
 ---
 
 ## 📂 Featured Projects
@@ -53,7 +50,7 @@ I am refining my "Test-First" approach to build more resilient software:
 ![Stars](https://img.shields.io/github/stars/devstackjunior?style=social)
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=devstackjunior&show_icons=true&theme=radical" alt="GitHub Stats" />
+  <img src="assets/languages.png" alt="GitHub Stats" />
 </p>
 
 ---
