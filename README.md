@@ -1,5 +1,7 @@
 # 👋 Hello there, I'm DevStackJunior
 
+![star-wars-obi-wan-kenobi](https://github.com/user-attachments/assets/f612d69e-6c64-4512-b0a6-0529692eeb51)
+
 ## 🚀 Currently Learning & Building
 I am currently focused on cloud architecture and scaling applications.
 ### ☁️ Cloud & Infrastructure
