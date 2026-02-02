@@ -1,11 +1,13 @@
 {
+  "TypeScript": 246166,
+  "Edge": 42989,
+  "CSS": 6419,
+  "JavaScript": 18252,
   "Python": 1698,
-  "Vue": 12419,
-  "TypeScript": 128982,
-  "CSS": 2555,
-  "HTML": 329,
-  "C#": 117847,
-  "Bru": 1348,
-  "JavaScript": 2244,
+  "HTML": 33191,
+  "Roff": 21129,
+  "C#": 131538,
+  "AIDL": 1409,
+  "Bru": 2696,
   "PHP": 14738
 }
