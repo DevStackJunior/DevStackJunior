@@ -1,32 +1,34 @@
 # Language usage report
 
-Generated: 2026-02-09T06:55:02.941Z
+Generated: 2026-02-16T06:53:13.554Z
 
 ## Overall (all repos combined)
 
 | Language | Share | Bytes |
 |---|---:|---:|
-| TypeScript | 43.13% | 336,273 |
-| C# | 16.87% | 131,538 |
-| JavaScript | 11.22% | 87,484 |
-| Vue | 9.87% | 76,944 |
-| Edge | 6.69% | 52,133 |
-| HTML | 4.31% | 33,610 |
-| Roff | 2.71% | 21,129 |
-| PHP | 1.89% | 14,738 |
-| CSS | 1.53% | 11,914 |
-| Python | 1.16% | 9,020 |
-| Bru | 0.35% | 2,696 |
-| AIDL | 0.18% | 1,409 |
-| Shell | 0.10% | 748 |
+| LLVM | 48.50% | 7,957,317 |
+| Java | 29.59% | 4,854,457 |
+| C# | 17.77% | 2,915,202 |
+| TypeScript | 2.05% | 336,273 |
+| JavaScript | 0.53% | 87,484 |
+| Vue | 0.47% | 76,944 |
+| HTML | 0.40% | 66,168 |
+| Edge | 0.32% | 52,133 |
+| Roff | 0.13% | 21,129 |
+| PHP | 0.09% | 14,738 |
+| CSS | 0.07% | 11,914 |
+| Python | 0.05% | 9,020 |
+| Bru | 0.02% | 2,696 |
+| AIDL | 0.01% | 1,409 |
+| Shell | 0.00% | 748 |
 
-Total bytes: **779,636**
+Total bytes: **16,407,632**
 
 ## Per repository (top 5 languages)
 
 | Repo | Total bytes | Top languages |
 |---|---:|---|
-| MAUI-flashcards-vpa | 150,916 | TypeScript 48.5%, HTML 21.6%, Roff 14.0%, C# 13.4%, AIDL 0.9% |
+| MAUI-BooksReader-vpa | 15,778,912 | LLVM 50.4%, Java 30.8%, C# 17.8%, TypeScript 0.5%, HTML 0.4% |
 | cicd-todo-app | 135,930 | Vue 56.6%, JavaScript 22.5%, TypeScript 19.3%, CSS 1.2%, HTML 0.3% |
 | PoC-TWINT-WERO | 113,951 | TypeScript 54.7%, JavaScript 33.9%, Edge 8.0%, CSS 3.3% |
 | Real-Time-Load-Analytics-Dashboard | 111,285 | C# 100.0% |
