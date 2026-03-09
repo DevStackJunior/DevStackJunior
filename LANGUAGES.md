@@ -1,15 +1,15 @@
 # Language usage report
 
-Generated: 2026-03-02T06:44:46.438Z
+Generated: 2026-03-09T06:50:40.412Z
 
 ## Overall (all repos combined)
 
 | Language | Share | Bytes |
 |---|---:|---:|
-| LLVM | 48.50% | 7,957,317 |
-| Java | 29.59% | 4,854,457 |
-| C# | 17.77% | 2,915,202 |
-| TypeScript | 2.05% | 336,273 |
+| LLVM | 48.48% | 7,957,317 |
+| Java | 29.57% | 4,854,457 |
+| C# | 17.78% | 2,919,244 |
+| TypeScript | 2.07% | 339,440 |
 | JavaScript | 0.53% | 87,484 |
 | Vue | 0.47% | 76,944 |
 | HTML | 0.40% | 66,168 |
@@ -22,13 +22,13 @@ Generated: 2026-03-02T06:44:46.438Z
 | AIDL | 0.01% | 1,409 |
 | Shell | 0.00% | 748 |
 
-Total bytes: **16,407,632**
+Total bytes: **16,414,841**
 
 ## Per repository (top 5 languages)
 
 | Repo | Total bytes | Top languages |
 |---|---:|---|
-| MAUI-BooksReader-vpa | 15,778,912 | LLVM 50.4%, Java 30.8%, C# 17.8%, TypeScript 0.5%, HTML 0.4% |
+| MAUI-BooksReader-vpa | 15,786,121 | LLVM 50.4%, Java 30.8%, C# 17.8%, TypeScript 0.5%, HTML 0.4% |
 | cicd-todo-app | 135,930 | Vue 56.6%, JavaScript 22.5%, TypeScript 19.3%, CSS 1.2%, HTML 0.3% |
 | PoC-TWINT-WERO | 113,951 | TypeScript 54.7%, JavaScript 33.9%, Edge 8.0%, CSS 3.3% |
 | Real-Time-Load-Analytics-Dashboard | 111,285 | C# 100.0% |
