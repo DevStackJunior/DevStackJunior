@@ -20,7 +20,7 @@ I am refining my "Test-First" approach to build more resilient software:
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=js,html,css,tailwind,react,nextjs, vuejs, adonisjs, docker" />
+    <img src="https://skillicons.dev/icons?i=js,html,css,tailwind,react,nextjs,vuejs,docker" />
   </a>
 </p>
 
